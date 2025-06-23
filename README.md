@@ -11,3 +11,9 @@
 pip install langchain faiss-cpu transformers sentence-transformers
 
 ```
+
+### Example Question
+
+```bash
+What is Langchain?
+```

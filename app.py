@@ -37,9 +37,19 @@ qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=db.as_re
 # 5. Chat Loop
 print("🤖 AI Chatbot Ready! Ask anything based on your documents.\n(Type 'exit' to quit)")
 
+
 while True:
     query = input("You: ")
     if query.lower() in ["exit", "quit"]:
         break
+
+   
+    retrieved_docs = db.as_retriever().get_relevant_documents(query)
+
+    if not retrieved_docs:
+        print("Bot: Sorry, I couldn't find anything related to that in the documents.\n")
+        continue
+
+    # Proceed with normal QA if documents were found
     answer = qa.run(query)
     print(f"Bot: {answer}\n")
